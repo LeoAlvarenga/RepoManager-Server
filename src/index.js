@@ -6,7 +6,8 @@ const { response, request } = require('express')
 
 const app = express()
 
-app.use(cors)
+app.use(cors())
+
 app.use(express.json())
 
 /**
@@ -29,7 +30,7 @@ function logRequest(request, response, next) {
 }
 
 function validateProjectId(request, response, next) {
-    const { id } = response.params
+    const { id } = request.params
 
     if(!isUuid(id)) {
         return response.status(400).json({ error: 'Invalid project ID. '})
